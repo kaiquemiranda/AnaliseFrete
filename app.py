@@ -44,4 +44,4 @@ if file is not None:
     with st.expander("Média de frete"):
         st.markdown(f'{media:.2f}')
 else:
-    st.write("Por favor, carregue um arquivo CSV.")
+    st.write("Por favor, carregue um arquivo EXCEL.")
