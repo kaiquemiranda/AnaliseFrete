@@ -1,15 +1,16 @@
 import pandas as pd
 import plotly.express as px
 import streamlit as st
+import openpyxl
 
-st.sidebar.image('box7.png')
-st.title('Vendas com Frete Alto')
+st.image('box7.png')
+st.title('Vendas com frete acima de 30%')
 
-file = st.sidebar.file_uploader("Carregue o arquivo em formato CSV", type=["csv"])
+file = st.file_uploader("Escolha um arquivo Excel", type="xlsx")
 
 # Verificar se um arquivo foi carregado
 if file is not None:
-    vendas = pd.read_csv(file, sep=';', encoding='latin1', decimal=',')
+    vendas = pd.read_excel(file, sheet_name='Vendas BR', engine='openpyxl', skiprows=5)
 
     # Calculo de porcentagem de frete
     vendas['frete real'] = vendas['Tarifas de envio'] + vendas['Receita por envio (BRL)']
@@ -36,11 +37,11 @@ if file is not None:
             st.markdown("----")
             st.write(maior_frete)
             st.markdown("----")
-        with st.expander("Média de frete"):
-            st.markdown(f'{media:.2f}')
-
     else:
         st.markdown("----")
         st.markdown("Não há vendas com frete maior que 30% no período informado")
+
+    with st.expander("Média de frete"):
+        st.markdown(f'{media:.2f}')
 else:
-    st.write("Por favor, carregue um arquivo CSV.")
+    st.write("Por favor, carregue um arquivo EXCEL.")
