@@ -3,10 +3,10 @@ import plotly.express as px
 import streamlit as st
 import openpyxl
 
-st.image('box7.png')
+st.sidebar.image('box7.png')
 st.title('Vendas com frete acima de 30%')
 
-file = st.file_uploader("Escolha um arquivo Excel", type="xlsx")
+file = st.sidebar.file_uploader("Escolha um arquivo Excel", type="xlsx")
 
 # Verificar se um arquivo foi carregado
 if file is not None:
